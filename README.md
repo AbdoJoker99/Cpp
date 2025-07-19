@@ -65,8 +65,7 @@ A comprehensive collection of **basic data structures**, **mathematical utilitie
 Clone the repository:
 
 ```bash
-git clone https://github.com/AbdoJoker99/cpp-dsa-basics.git
-cd cpp-dsa-basics
+git clone https://github.com/AbdoJoker99/Cpp
 ```
 
 ### 🛠️ Installing MSYS2 and GCC (Windows)
@@ -121,7 +120,7 @@ Thanks to the following amazing people for contributing:
 
 | Name | GitHub |
 |------|--------|
-| Abdo | [@your-username](https://github.com/your-username) |
+| Abdo | [@AbdoJoker99](https://github.com/AbdoJoker99) |
 
 ---
 
@@ -165,7 +164,4 @@ See the [LICENSE](LICENSE) file for more information.
 
 ---
 
-## 📬 Contact
 
-Have questions or suggestions?  
-Feel free to open an [issue](https://github.com/AbdoJoker99/cpp-dsa-basics/issues) or reach me on [GitHub](https://github.com/AbdoJoker99).
