@@ -116,8 +116,6 @@ git clone https://github.com/AbdoJoker99/Cpp
 
 ## 👥 Contributors
 
-Thanks to the following amazing people for contributing:
-
 | Name | GitHub |
 |------|--------|
 | Abdo | [@AbdoJoker99](https://github.com/AbdoJoker99) |
