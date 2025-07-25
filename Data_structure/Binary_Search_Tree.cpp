@@ -1,9 +1,8 @@
 #include <iostream>
 #include <vector>
-#include <string>
-
 using namespace std;
 
+// Node of a BST
 class Node {
 public:
     int key;
@@ -17,6 +16,8 @@ class BinarySearchTree {
 private:
     Node* root;
 
+    // Insert key into BST rooted at 'root'
+    // Time Complexity: O(h) where h is tree height, average O(log n), worst O(n)
     Node* insert(Node* root, int key) {
         if (root == nullptr) {
             return new Node(key);
@@ -25,9 +26,12 @@ private:
             root->left = insert(root->left, key);
         else if (key > root->key)
             root->right = insert(root->right, key);
+        // if key == root->key, no duplicates inserted
         return root;
     }
 
+    // Search key in BST rooted at 'root'
+    // Time Complexity: O(h)
     Node* search(Node* root, int key) {
         if (root == nullptr || root->key == key)
             return root;
@@ -37,6 +41,8 @@ private:
             return search(root->right, key);
     }
 
+    // Find node with minimum key (leftmost leaf)
+    // Time Complexity: O(h)
     Node* minValueNode(Node* node) {
         Node* current = node;
         while (current && current->left != nullptr)
@@ -44,6 +50,8 @@ private:
         return current;
     }
 
+    // Delete a node with given key from BST rooted at 'root'
+    // Time Complexity: O(h)
     Node* deleteNode(Node* root, int key) {
         if (root == nullptr)
             return root;
@@ -53,7 +61,7 @@ private:
         else if (key > root->key)
             root->right = deleteNode(root->right, key);
         else {
-            // node with only one child or no child
+            // Node with only one child or no child
             if (root->left == nullptr) {
                 Node* temp = root->right;
                 delete root;
@@ -65,14 +73,20 @@ private:
                 return temp;
             }
 
-            // node with two children
+            // Node with two children: get inorder successor (smallest in right subtree)
             Node* temp = minValueNode(root->right);
+
+            // Copy inorder successor's content to this node
             root->key = temp->key;
+
+            // Delete inorder successor
             root->right = deleteNode(root->right, temp->key);
         }
         return root;
     }
 
+    // Inorder traversal: Left, Root, Right
+    // Time Complexity: O(n)
     void inorderTraversal(Node* root, vector<int>& result) {
         if (root) {
             inorderTraversal(root->left, result);
@@ -81,6 +95,8 @@ private:
         }
     }
 
+    // Preorder traversal: Root, Left, Right
+    // Time Complexity: O(n)
     void preorderTraversal(Node* root, vector<int>& result) {
         if (root) {
             result.push_back(root->key);
@@ -89,6 +105,8 @@ private:
         }
     }
 
+    // Postorder traversal: Left, Right, Root
+    // Time Complexity: O(n)
     void postorderTraversal(Node* root, vector<int>& result) {
         if (root) {
             postorderTraversal(root->left, result);
@@ -131,6 +149,7 @@ public:
     }
 };
 
+// Utility function to print elements of vector
 void printVector(const vector<int>& v) {
     for (int val : v) {
         cout << val << " ";

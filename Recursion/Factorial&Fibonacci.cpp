@@ -2,56 +2,48 @@
 
 #include <iostream>
 #include <vector>
-#include <array>
-#include <deque>
-#include <stack>
-#include <set>
-#include <unordered_set>
-#include <algorithm>
-#include <numeric> // accumulate
-#include <memory>
-#include <cstring>
-
 using namespace std;
 
+// Fast IO macros for competitive programming style
 #define pb push_back
-#define pf push_front
-#define ALL(x) (x).begin(), (x).end()
-#define rALL(x) (x).rbegin(), (x).rend()
-#define sz(x) int((x).size())
 #define FAST ios::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr)
 #define endl '\n'
 
-// Recursive factorial
+// Recursive factorial function
+// Time Complexity: O(n)
 int factorial(int n) {
     return (n <= 1) ? 1 : n * factorial(n - 1);
 }
 
-// Recursive Fibonacci
+// Recursive Fibonacci function
+// Exponential time complexity: O(2^n), inefficient for large n
 int fibonacci_recursive(int n) {
     if (n <= 1)
         return n;
     return fibonacci_recursive(n - 1) + fibonacci_recursive(n - 2);
 }
 
-// Iterative Fibonacci using vector
+// Iterative Fibonacci using a vector to store sequence
+// Time Complexity: O(n)
 vector<int> fibonacci_iterative(int n) {
     vector<int> fib;
-    if (n <= 0) return fib;
-    fib.pb(0);
-    if (n == 1) return fib;
-    fib.pb(1);
+    if (n <= 0) return fib;  // Return empty for non-positive input
+    fib.pb(0);              // First Fibonacci number
+    if (n == 1) return fib; // If only one term requested, return
+
+    fib.pb(1);              // Second Fibonacci number
     for (int i = 2; i < n; ++i) {
-        fib.pb(fib[i - 1] + fib[i - 2]);
+        fib.pb(fib[i - 1] + fib[i - 2]); // Sum of previous two numbers
     }
     return fib;
 }
 
 int main() {
-    FAST;
+    FAST;  // Enable fast IO
+
+    int num = 5;
 
     // Factorial demo
-    int num = 5;
     cout << "Factorial of " << num << " is: " << factorial(num) << endl;
 
     // Fibonacci recursive demo

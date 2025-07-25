@@ -1,29 +1,35 @@
 // Author: abdo
-#include <iostream>
-#include <list>
-#include <vector>
-#include <string>
-#include <utility> // for pair
+
+#include <iostream>   // For input/output stream (cin, cout)
+#include <list>       // For doubly-linked list container used in chaining
+#include <vector>     // For dynamic array used to store hash table buckets
+#include <string>     // For string class used as key and value
+#include <utility>    // For std::pair used to store key-value pairs
+
 using namespace std;
 
 class HashTable {
 private:
-    static const int size = 10;
-    vector<list<pair<string, string>>> table;
+    static const int size = 10; // Number of buckets (fixed size)
+    vector<list<pair<string, string>>> table; // Hash table using separate chaining
 
-    // Simple hash function using std::hash and modulo table size
+    // Hash function: maps key to index in table
+    // Time Complexity: O(1) (average case)
     int hash_function(const string& key) {
         return static_cast<int>(hash<string>{}(key) % size);
     }
 
 public:
+    // Constructor
+    // Time Complexity: O(1)
     HashTable() {
         table.resize(size);
     }
 
+    // Insert or update key-value pair
+    // Time Complexity: O(n/k) ≈ O(1) average case, O(n) worst case (if all keys hash to same bucket)
     void insert_hashtable(const string& key, const string& value) {
         int index = hash_function(key);
-        // Check if key exists, update if found
         for (auto& item : table[index]) {
             if (item.first == key) {
                 item.second = value;
@@ -31,11 +37,12 @@ public:
                 return;
             }
         }
-        // Else insert new pair
         table[index].push_back(make_pair(key, value));
         cout << "Key-value pair inserted\n";
     }
 
+    // Search for a value by key
+    // Time Complexity: O(n/k) ≈ O(1) average case, O(n) worst case
     string hash_search(const string& key) {
         int index = hash_function(key);
         for (auto& item : table[index]) {
@@ -46,6 +53,8 @@ public:
         return "Key not found";
     }
 
+    // Delete a key from the hash table
+    // Time Complexity: O(n/k) ≈ O(1) average case, O(n) worst case
     void delete_hash(const string& key) {
         int index = hash_function(key);
         for (auto it = table[index].begin(); it != table[index].end(); ++it) {
@@ -58,6 +67,8 @@ public:
         cout << "Key not found, cannot delete\n";
     }
 
+    // Clear the entire hash table
+    // Time Complexity: O(k), where k = number of buckets
     void delete_hash_table() {
         table.clear();
         table.resize(size);

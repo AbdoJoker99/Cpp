@@ -1,17 +1,17 @@
 // Author: abdo_joker
 
-#include <iostream>
-#include <deque>
+#include <iostream>   // For cin, cout
+#include <deque>      // STL double-ended queue
 using namespace std;
 
 int main() {
-    deque<int> dq;
+    deque<int> dq; // Declare a deque of integers
 
-    // Insert elements at front and back
-    dq.push_back(10);
-    dq.push_front(20);
-    dq.push_back(30);
-    dq.push_front(40);
+    // -------- Insert elements --------
+    dq.push_back(10);     // Insert at the back: [10]
+    dq.push_front(20);    // Insert at the front: [20, 10]
+    dq.push_back(30);     // [20, 10, 30]
+    dq.push_front(40);    // [40, 20, 10, 30]
 
     cout << "Deque elements: ";
     for (int val : dq) {
@@ -19,13 +19,13 @@ int main() {
     }
     cout << endl;
 
-    // Access front and back
-    cout << "Front: " << dq.front() << endl;
-    cout << "Back: " << dq.back() << endl;
+    // -------- Access front and back --------
+    cout << "Front: " << dq.front() << endl; // Should print 40
+    cout << "Back: " << dq.back() << endl;   // Should print 30
 
-    // Remove elements from both ends
-    dq.pop_front();
-    dq.pop_back();
+    // -------- Remove elements --------
+    dq.pop_front(); // Removes 40 → [20, 10, 30]
+    dq.pop_back();  // Removes 30 → [20, 10]
 
     cout << "Deque after popping front and back: ";
     for (int val : dq) {
@@ -33,7 +33,7 @@ int main() {
     }
     cout << endl;
 
-    // Check if deque is empty
+    // -------- Check if empty and get size --------
     if (dq.empty()) {
         cout << "Deque is empty.\n";
     } else {

@@ -1,66 +1,89 @@
 // Author: abdo
 #include <iostream>
 #include <vector>
-#include <algorithm> // for reverse, max_element, min_element
+#include <algorithm> // for reverse, max_element, min_element, swap
 #include <climits>   // for INT_MAX, INT_MIN
 
 using namespace std;
 
+// ---------- Function: Print a subarray ----------
+template <typename T>
+void print_subarray(const vector<T>& v, size_t start, size_t end) {
+    if (v.empty()) {
+        cout << "Subarray: (vector is empty)\n";
+        return;
+    }
+    if (start > end || end >= v.size()) {
+        cout << "Invalid subarray range [" << start << ", " << end << "].\n";
+        return;
+    }
+
+    cout << "Subarray [" << start << ".." << end << "]: ";
+    for (size_t i = start; i <= end; ++i) {
+        cout << v[i] << (i < end ? ' ' : '\n');
+    }
+}
+
+// ---------- Function: Add two arrays element-wise ----------
+vector<int> add_arrays(const vector<int>& a, const vector<int>& b) {
+    if (a.size() != b.size()) {
+        cerr << "Error: Arrays must be of the same size to add.\n";
+        return {};
+    }
+    vector<int> result(a.size());
+    for (size_t i = 0; i < a.size(); ++i)
+        result[i] = a[i] + b[i];
+    return result;
+}
+
+// ---------- Main Function ----------
 int main() {
-    // Declare and initialize vector with negative numbers
-    vector<int> arr = {-1, 2, 3, 4, 5};
-    cout << "arr = ";
+    vector<int> arr = {-1, 2, 3, 4, 5};               // signed integers
+    vector<unsigned int> arr2 = {1, 2, 3, 4, 5};       // unsigned integers
+
+    // Print original arrays
+    cout << "Original arr = ";
     for (int val : arr) cout << val << " ";
     cout << "\n";
 
-    // Access element at index 2
-    cout << "arr[2] = " << arr[2] << "\n";
-
-    // Find index of element = 2
-    auto it = find(arr.begin(), arr.end(), 2);
-    if (it != arr.end())
-        cout << "Index of 2 = " << distance(arr.begin(), it) << "\n";
-    else
-        cout << "2 not found in array\n";
-
-    // Unsigned int array (cannot contain negative numbers)
-    vector<unsigned int> arr2 = {1, 2, 3, 4, 5};
-    cout << "arr2 = ";
+    cout << "Original arr2 = ";
     for (unsigned int val : arr2) cout << val << " ";
     cout << "\n";
 
-    // Creation using for loop
-    cout << "\nPrint elements in arr:\n";
-    for (int i : arr) cout << i << " ";
-    cout << "\n";
-
-    cout << "\nPrint index and element:\n";
-    for (int i = 0; i < arr.size(); i++)
-        cout << i << ": " << arr[i] << "\n";
-
-    // buffer_info equivalent (pointer + size)
-    cout << "\nBuffer info:\n";
-    cout << "arr address = " << &arr[0] << ", size = " << arr.size() << "\n";
-    cout << "arr2 address = " << &arr2[0] << ", size = " << arr2.size() << "\n";
-
-    // Reverse
+    // ---------- Reverse arr ----------
     reverse(arr.begin(), arr.end());
     cout << "\nReversed arr = ";
     for (int val : arr) cout << val << " ";
     cout << "\n";
 
-    // Append
+    // ---------- Append 200 to arr ----------
     arr.push_back(200);
-    cout << "\nAfter append arr = ";
+
+    // ---------- Add arr + arr2 ----------
+    vector<int> arr2_cast(arr2.begin(), arr2.end()); // convert unsigned to int
+    vector<int> added = add_arrays(arr, arr2_cast);
+    if (!added.empty()) {
+        cout << "\nAdded arrays result = ";
+        for (int val : added) cout << val << " ";
+        cout << "\n";
+    }
+
+    // ---------- Swap arr and arr2_cast ----------
+    cout << "\nBefore swap:\n";
+    cout << "arr = ";
     for (int val : arr) cout << val << " ";
+    cout << "\narr2_cast = ";
+    for (int val : arr2_cast) cout << val << " ";
     cout << "\n";
 
-    // Length
-    cout << "\nLength of arr = " << arr.size() << "\n";
+    swap(arr, arr2_cast); // std::swap
 
-    // Max and Min
-    cout << "Max = " << *max_element(arr.begin(), arr.end()) << "\n";
-    cout << "Min = " << *min_element(arr.begin(), arr.end()) << "\n";
+    cout << "\nAfter swap:\n";
+    cout << "arr = ";
+    for (int val : arr) cout << val << " ";
+    cout << "\narr2_cast = ";
+    for (int val : arr2_cast) cout << val << " ";
+    cout << "\n";
 
     return 0;
 }
