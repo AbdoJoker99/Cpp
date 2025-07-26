@@ -83,6 +83,7 @@ vector<int> quick_sort(vector<int> arr) {
 int binary_search(const vector<int>& arr, int x) {
     int l = 0, r = arr.size() - 1;
     while (l <= r) {
+        //Avoids overflow using (r - l) instead of l + r.
         int mid = l + (r - l) / 2;
         if (arr[mid] == x) return mid;
         else if (arr[mid] < x) l = mid + 1;
